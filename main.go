@@ -1,9 +1,13 @@
 package main
 
 import (
-	"problem2/controller"
+	"fmt"
+	"user-manager/app"
 )
 
 func main() {
-	controller.Menu()
+	err := app.Start()
+	if err != nil {
+		fmt.Println(err)
+	}
 }

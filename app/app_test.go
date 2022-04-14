@@ -1,13 +1,6 @@
-package business
+package app
 
-import (
-	"problem2/user"
-	"problem2/user/course"
-	"testing"
-
-	"github.com/stretchr/testify/assert"
-)
-
+/*
 func TestValidateNewUserDetails(t *testing.T) {
 
 	positiveTests := []struct {
@@ -43,3 +36,4 @@ func TestValidateNewUserDetails(t *testing.T) {
 	}
 
 }
+*/

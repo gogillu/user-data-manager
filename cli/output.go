@@ -1,11 +1,11 @@
-package io
+package cli
 
 import (
 	"fmt"
-	"problem2/user"
+	"user-manager/user"
 )
 
-func ShowMenuOptions() {
+func ShowMenu() {
 	fmt.Println()
 	fmt.Println(" __________________")
 	fmt.Println("|    User Menu     |")
@@ -19,21 +19,17 @@ func ShowMenuOptions() {
 	fmt.Println()
 }
 
-func DisplayUserDetails(sortKey string) {
-	users := user.SortUsersByKey(user.GetUserListFromUserMap(user.UserMap), sortKey)
+func DisplayUsers(users []user.User) {
 	fmt.Println()
 	fmt.Println("+-----------+--------------+----------+----------------+---------------------+")
 	fmt.Printf("|%10s |%13s |%9s |%15s |%20s |\n", "Name", "Roll Number", "Age", "Address", "Courses")
-	for _, usr := range users {
-		// fmt.Print(usr)
-		fmt.Println("+-----------+--------------+----------+----------------+---------------------+")
-		fmt.Printf("|%10s |%13d |%9d |%15s |%20s |\n", usr.GetName(), usr.GetRollNumber(), usr.GetAge(), usr.GetAddress(), usr.GetCoursesString())
-	}
 	fmt.Println("+-----------+--------------+----------+----------------+---------------------+")
+	for _, usr := range users {
+		DisplayUser(usr)
+	}
 }
 
-func SingleUserDisplay(singleuser user.User) {
-	fmt.Println("+-----------+--------------+----------+----------------+---------------------+")
+func DisplayUser(singleuser user.User) {
 	fmt.Printf("|%10s |%13d |%9d |%15s |%20s |\n", singleuser.GetName(), singleuser.GetRollNumber(), singleuser.GetAge(), singleuser.GetAddress(), singleuser.GetCoursesString())
 	fmt.Println("+-----------+--------------+----------+----------------+---------------------+")
 }

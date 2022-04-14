@@ -1,4 +1,4 @@
-package io
+package cli
 
 import (
 	"bufio"
@@ -6,14 +6,14 @@ import (
 	"os"
 )
 
-func AskUserMenuChoice() int {
+func GetMenuChoice() int {
 	var choice int
 	fmt.Print("Choose : ")
 	fmt.Scan(&choice)
 	return choice
 }
 
-func AskNewUserDetails() (string, int, string, int, string) {
+func GetUser() (string, int, string, int, string) {
 	var name, address string
 	var age, rollnumber int
 	var courses_string string
@@ -34,8 +34,6 @@ func AskNewUserDetails() (string, int, string, int, string) {
 
 	in := bufio.NewReader(os.Stdin)
 	courses_string, err := in.ReadString('\n')
-	// fmt.Scan(&courses_string)
-
 	if err != nil {
 		fmt.Println("error : reading the courses")
 	}
@@ -43,21 +41,21 @@ func AskNewUserDetails() (string, int, string, int, string) {
 	return name, age, address, rollnumber, courses_string
 }
 
-func AskUserChoiceForUserListDisplay() string {
+func GetListFilter() string {
 	var sortPreference string
 	fmt.Print("sort preference key [ name | age | address | roll ]: ")
 	fmt.Scan(&sortPreference)
 	return sortPreference
 }
 
-func AskUserRollNumberToDelete() int {
+func GetRollNo() int {
 	var rollnumber int
 	fmt.Print("roll number :")
 	fmt.Scan(&rollnumber)
 	return rollnumber
 }
 
-func AskUserToSaveUserDataOnDisk() string {
+func ConfirmSave() string {
 	var saveOnDisk string
 	fmt.Print("save data on disk [y/n] :")
 	fmt.Scan(&saveOnDisk)
