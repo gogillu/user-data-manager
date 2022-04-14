@@ -5,7 +5,8 @@ import (
 	"os"
 	"sort"
 	"strings"
-	"user-manager/user"
+
+	"gihub.com/gogillu/user-manager/user"
 )
 
 func createEmptyFile(filepath string) error {

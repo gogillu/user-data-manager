@@ -3,10 +3,11 @@ package app
 import (
 	"fmt"
 	"strings"
-	"user-manager/cli"
-	"user-manager/repository"
-	"user-manager/user"
-	"user-manager/user/enum"
+
+	"gihub.com/gogillu/user-manager/cli"
+	"gihub.com/gogillu/user-manager/repository"
+	"gihub.com/gogillu/user-manager/user"
+	"gihub.com/gogillu/user-manager/user/enum"
 )
 
 const (

@@ -2,7 +2,8 @@ package main
 
 import (
 	"fmt"
-	"user-manager/app"
+
+	"gihub.com/gogillu/user-manager/app"
 )
 
 func main() {

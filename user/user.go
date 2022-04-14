@@ -3,7 +3,8 @@ package user
 import (
 	"encoding/json"
 	"fmt"
-	"user-manager/user/enum"
+
+	"gihub.com/gogillu/user-manager/user/enum"
 
 	validation "github.com/go-ozzo/ozzo-validation"
 )

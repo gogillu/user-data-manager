@@ -3,8 +3,9 @@ package repository
 import (
 	"fmt"
 	"testing"
-	"user-manager/user"
-	"user-manager/user/enum"
+
+	"gihub.com/gogillu/user-manager/user"
+	"gihub.com/gogillu/user-manager/user/enum"
 
 	"github.com/stretchr/testify/assert"
 )

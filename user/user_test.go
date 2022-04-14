@@ -3,7 +3,8 @@ package user
 import (
 	"fmt"
 	"testing"
-	"user-manager/user/enum"
+
+	"gihub.com/gogillu/user-manager/user/enum"
 
 	"github.com/stretchr/testify/assert"
 )

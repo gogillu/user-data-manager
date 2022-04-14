@@ -2,7 +2,8 @@ package cli
 
 import (
 	"fmt"
-	"user-manager/user"
+
+	"gihub.com/gogillu/user-manager/user"
 )
 
 func ShowMenu() {

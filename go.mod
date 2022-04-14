@@ -1,4 +1,4 @@
-module user-manager
+module gihub.com/gogillu/user-manager
 
 go 1.18
 

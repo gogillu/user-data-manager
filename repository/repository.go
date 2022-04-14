@@ -2,7 +2,8 @@ package repository
 
 import (
 	"fmt"
-	"user-manager/user"
+
+	"gihub.com/gogillu/user-manager/user"
 )
 
 const (
