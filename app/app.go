@@ -31,7 +31,6 @@ func Start() error {
 	for !exit {
 		cli.ShowMenu()
 		choice := cli.GetMenuChoice()
-		var err error
 
 		switch choice {
 		case OptionAdd:
@@ -57,38 +56,39 @@ func Start() error {
 }
 
 func getCourses(courses string) ([]enum.Course, error) {
-	coursesList := strings.Fields(courses)
-	var courseList []enum.Course
+	obtainedCourseList := strings.Fields(courses)
+	var framedCourseList []enum.Course
 
-	for _, c := range coursesList {
+	for _, c := range obtainedCourseList {
 		course, err := enum.CourseString(c)
 		if err != nil {
-			return courseList, fmt.Errorf("%s error parsing the provided course, invalid course : ", c)
+			return framedCourseList, fmt.Errorf("%s error parsing the provided course, invalid course : ", c)
 		}
 
-		courseList = append(courseList, course)
+		framedCourseList = append(framedCourseList, course)
 	}
 
-	return courseList, nil
+	return framedCourseList, nil
 }
 
 func AddUser(userRepo repository.Repository) error {
 	name, age, address, rollnumber, course_string := cli.GetUser()
-	courses, err1 := getCourses(course_string)
-	if err1 != nil {
-		fmt.Println("error : course entered are not valid try adding again", err1)
+	courses, err := getCourses(course_string)
+	if err != nil {
+		fmt.Println("error : course entered are not valid try adding again", err)
 		return nil
 	}
 
-	usr, err2 := user.New(name, age, address, rollnumber, courses)
-	if err2 != nil {
-		fmt.Println("error : ", err2, "try again!")
+	var usr user.User
+	usr, err = user.New(name, age, address, rollnumber, courses)
+	if err != nil {
+		fmt.Println("error : ", err, "try again!")
 		return nil
 	}
 
-	err3 := userRepo.Add(usr)
-	if err3 != nil {
-		fmt.Println("error : ", err3, "try again!")
+	err = userRepo.Add(usr)
+	if err != nil {
+		fmt.Println("error : ", err, "try again!")
 		return nil
 	}
 

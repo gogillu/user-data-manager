@@ -12,7 +12,3 @@ const (
 	E
 	F
 )
-
-func String(course Course) string {
-	return course.String()
-}

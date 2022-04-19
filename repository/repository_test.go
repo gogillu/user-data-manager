@@ -37,7 +37,7 @@ func TestLoad(t *testing.T) {
 
 func TestAdd(t *testing.T) {
 	testRepo := NewRepo()
-	testRepo.Load(Datastore)
+	_ = testRepo.Load(Datastore)
 
 	test := []struct {
 		name   string
@@ -98,7 +98,7 @@ func TestAdd(t *testing.T) {
 func TestDelete(t *testing.T) {
 
 	testRepo := NewRepo()
-	testRepo.Load(Datastore)
+	_ = testRepo.Load(Datastore)
 
 	initialData := []user.User{
 		{
@@ -125,7 +125,7 @@ func TestDelete(t *testing.T) {
 	}
 
 	for _, usr := range initialData {
-		testRepo.Add(usr)
+		_ = testRepo.Add(usr)
 	}
 
 	test := []struct {

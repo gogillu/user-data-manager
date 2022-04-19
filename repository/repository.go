@@ -120,8 +120,8 @@ func (repo *repository) Save() error {
 		return err
 	}
 
-	err2 := WriteDisk(repo.file, encodedUsers)
-	if err2 != nil {
+	err = WriteDisk(repo.file, encodedUsers)
+	if err != nil {
 		return err
 	}
 
@@ -157,7 +157,7 @@ func EncodeUsers(usersMap map[int]user.User) (string, error) {
 	serializedUserData, err := json.Marshal(usersMap)
 
 	if err != nil {
-		return "", err
+		return "", fmt.Errorf("error encoding users %v", err)
 	}
 
 	return string(serializedUserData), nil
