@@ -11,15 +11,20 @@ import (
 )
 
 const (
-	Datastore = "./data/users.json"
-	Yes       = "y"
+	DatastoreFilepath = "./data/users.json"
+	Yes               = "y"
+	OptionAdd         = 1
+	OptionList        = 2
+	OptionDelete      = 3
+	OptionSave        = 4
+	OptionExit        = 5
 )
 
 func Start() error {
 	userRepo := repository.NewRepo()
-	err := userRepo.Load(Datastore)
+	err := userRepo.Load(DatastoreFilepath)
 	if err != nil {
-		return nil
+		return err
 	}
 
 	exit := false
@@ -29,15 +34,15 @@ func Start() error {
 		var err error
 
 		switch choice {
-		case 1:
+		case OptionAdd:
 			err = AddUser(userRepo)
-		case 2:
+		case OptionList:
 			err = ListUsers(userRepo)
-		case 3:
+		case OptionDelete:
 			err = DeleteUser(userRepo)
-		case 4:
+		case OptionSave:
 			err = SaveUsers(userRepo)
-		case 5:
+		case OptionExit:
 			err = Exit(userRepo)
 			exit = true
 		default:

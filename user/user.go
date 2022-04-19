@@ -1,7 +1,6 @@
 package user
 
 import (
-	"encoding/json"
 	"fmt"
 
 	"gihub.com/gogillu/user-manager/user/enum"
@@ -39,12 +38,17 @@ func New(name string, age int, address string, rollnumber int, courses []enum.Co
 
 func (usr User) validate() error {
 	return validation.ValidateStruct(&usr,
+		validation.Field(&usr.Name, validation.Required),
 		validation.Field(&usr.RollNumber, validation.Required),
+		validation.Field(&usr.RollNumber, validation.Required, validation.By(checkNegative)),
+		validation.Field(&usr.Age, validation.Required, validation.By(checkNegative)),
 		validation.Field(&usr.Courses, validation.Required, validation.By(validateCourses)),
 	)
 }
 
-// validate Courses (1) Should be 4 to 6 (2) No repeatation
+// Courses Validation
+// 1. Courses should be between 4 to 6
+// 2. Courses should not be duplicate
 func validateCourses(value interface{}) error {
 	courses := value.([]enum.Course)
 	if len(courses) < MinCourses || len(courses) > MaxCourses {
@@ -59,6 +63,14 @@ func validateCourses(value interface{}) error {
 		courseMap[c] = true
 	}
 
+	return nil
+}
+
+func checkNegative(value interface{}) error {
+	val := value.(int)
+	if val < 0 {
+		return fmt.Errorf("error : negative value unexpected")
+	}
 	return nil
 }
 
@@ -80,35 +92,4 @@ func (u User) GetAddress() string {
 
 func (u User) GetCourses() []enum.Course {
 	return u.Courses
-}
-
-func (u User) GetCoursesString() string {
-	var courses string
-
-	for _, course := range u.GetCourses() {
-		courses += course.String() + ", "
-	}
-	return courses
-}
-
-func EncodeUsers(users []User) (string, error) {
-	serializedUserData, err := json.Marshal(users)
-
-	if err != nil {
-		return "", err
-	}
-
-	return string(serializedUserData), nil
-}
-
-func DecodeUsers(userDetailsString string) ([]User, error) {
-
-	var users []User
-	err := json.Unmarshal([]byte(userDetailsString), &users)
-
-	if err != nil {
-		return []User{}, fmt.Errorf("error in decoding users %v", err)
-	}
-
-	return users, nil
 }
