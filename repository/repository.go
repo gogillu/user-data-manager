@@ -46,11 +46,7 @@ func (repo *repository) Load(filepath string) error {
 	}
 
 	repo.file = filepath
-	repo.users = make(map[int]user.User)
-	for _, user := range users {
-		repo.users[user.GetRollNumber()] = user
-	}
-
+	repo.users = users
 	return nil
 }
 
@@ -155,7 +151,6 @@ func createEmptyFile(filepath string) error {
 
 func EncodeUsers(usersMap map[int]user.User) (string, error) {
 	serializedUserData, err := json.Marshal(usersMap)
-
 	if err != nil {
 		return "", fmt.Errorf("error encoding users %v", err)
 	}
@@ -166,7 +161,6 @@ func EncodeUsers(usersMap map[int]user.User) (string, error) {
 func DecodeUsers(userDetailsString string) (map[int]user.User, error) {
 	var usersMap map[int]user.User
 	err := json.Unmarshal([]byte(userDetailsString), &usersMap)
-
 	if err != nil {
 		return map[int]user.User{}, fmt.Errorf("error in decoding users %v", err)
 	}
